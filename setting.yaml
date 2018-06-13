@@ -1,0 +1,46 @@
+bucket: gam_storage
+#[agreeOn]
+#-compressFile:/<path>/<filename>
+#-runningPeriod: - day  -hr  -minute
+#
+#[GCS]
+#-csv: /<path>/<filename>
+#-log: /<path>/<filename>
+agreeOn:
+    -
+        name: pothong_1
+        compressFile: pothong-line1/model-potong-line1.tar.gz  
+        modelDir: model-potong-line1 
+        configModel:
+            hiddenUnit:
+                - 7 
+                - 7 
+                - 7
+            learningRate: 0.2
+        runningPeriod: 
+            prediction: 
+                - 1
+                - 0
+                - 0
+    -  
+        name: pothong_2
+        compressFile: pothong-line2/model-potong-line2.tar.gz 
+        modelDir: model-potong-line2
+        configModel:
+            hiddenUnit:
+                - 6 
+                - 6
+                - 6
+            learningRate: 0.2  
+        runningPeriod: 
+            prediction: 
+                - 1
+                - 0
+                - 0
+gcs:
+   - worker: pothong_1
+     csv: pothong-line1/data/pothong-line1-[MONTH].tar.gz
+     log: pothong-line1/pothong-line1-log.json
+   - worker: pothong_2
+     csv: pothong-line2/data/pothong-line2-[MONTH].tar.gz
+     log: pothong-line2/pothong-line2-log.json
